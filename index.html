@@ -43,12 +43,12 @@ footer {
 </style>
 
 	
-<link rel="icon" type="image/png" href="/favicon/favicon-96x96.png" sizes="96x96" />
-<link rel="icon" type="image/svg+xml" href="/favicon/favicon.svg" />
-<link rel="shortcut icon" href="/favicon/favicon.ico" />
-<link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png" />
-<meta name="apple-mobile-web-app-title" content="MyRPC" />
-<link rel="manifest" href="/favicon/site.webmanifest" />
+	<link rel="icon" type="image/png" href="/favicon/favicon-96x96.png" sizes="96x96" />
+	<link rel="icon" type="image/svg+xml" href="/favicon/favicon.svg" />
+	<link rel="shortcut icon" href="/favicon/favicon.ico" />
+	<link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png" />
+	<meta name="apple-mobile-web-app-title" content="MyRPC" />
+	<link rel="manifest" href="/favicon/site.webmanifest" />
 
 
   <title>MyRPC</title>
@@ -83,6 +83,65 @@ footer {
 		    yearSpan.textContent = new Date().getFullYear();
 	    }
 	</script>
+
+<script>
+const prompt = document.querySelector('.prompt');
+const installButton = prompt.querySelector('.prompt__install');
+const overlay = document.querySelector('.overlay'); // Select the overlay
+let installEvent;
+
+function getVisited() {
+  return sessionStorage.getItem('install-prompt');
+}
+
+function setVisited() {
+  sessionStorage.setItem('install-prompt', true);
+}
+
+// This event will only fire if the user does not have the PWA installed
+window.addEventListener('beforeinstallprompt', (event) => {
+  event.preventDefault();
+
+  // If no sessionStorage is set, first-time visitor in this session
+  if (!getVisited()) {
+    // Show the prompt banner and overlay
+    prompt.style.display = 'block';
+    overlay.style.display = 'block';
+
+    // Store the event for later use
+    installEvent = event;
+  }
+});
+
+installButton.addEventListener('click', () => {
+  // Hide the prompt banner and overlay
+  prompt.style.display = 'none';
+  overlay.style.display = 'none';
+
+  // Trigger the prompt to show to the user
+  installEvent.prompt();
+
+  // Check what choice the user made
+  installEvent.userChoice.then((choice) => {
+    // If the user declined, we don't want to show the button again
+    // Set sessionStorage to true
+    if (choice.outcome !== 'accepted') {
+      setVisited();
+    }
+
+    installEvent = null;
+  });
+});
+
+// Close the modal when clicking outside of it
+overlay.addEventListener('click', () => {
+  setVisited(); // Set sessionStorage to true
+  prompt.style.display = 'none';  // Hide the prompt banner
+  overlay.style.display = 'none'; // Hide the overlay
+  installEvent = null;
+});
+
+</script>
 
 	<script>
   if (typeof navigator.serviceWorker !== 'undefined') {
