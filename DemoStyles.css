@@ -55,8 +55,8 @@
 }
 
 .copyright {
-  //  margin-top: 5px; /* Add some space between social icons and copyright */
-    font-size: 6px; /* Font size for copyright text */
+  /*  margin-top: 5px; /* Add some space between social icons and copyright */
+    font-size: 5px; /* Font size for copyright text */
     color: #455A64; /* Copyright text color */
 }
 
