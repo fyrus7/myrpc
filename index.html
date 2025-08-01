@@ -4,151 +4,48 @@
 
 <link rel="stylesheet" href="/bcontain.css">
 	
- <style>
-html, body {
-      margin: 0;
-      padding: 0;
-      height: 100%;
-      display: flex;
-      flex-direction: column;
-    }
-	
-body {
-    font-family: Arial, sans-serif;
-    background-color: #E8ECEF;
-}
-
-
-    /* Centering the iframe and making it take up the available space */
-iframe {
-      width: 100%;
-      flex-grow: 1; /* Allow iframe to grow and take up space */
-      border: none;
-    }
-.copyright {
-   /* margin-top: 5px; /* Add some space between social icons and copyright */
-    font-size: 12px; /* Font size for copyright text */
-    color: #455A64; /* Copyright text color */
-}
-
-    /* Footer area to hold the button and copyright */
-footer {
-    margin-top: auto; /* Pushes footer to the bottom */
-    background-color: #E8ECEF; /* Match background color */
-    padding: 5px; /* Add padding */
-    color: #455A64; /* Change text color for visibility */
-    text-align: center;
-}
-
-</style>
-
-	
-	<link rel="icon" type="image/png" href="/favicon/favicon-96x96.png" sizes="96x96" />
-	<link rel="icon" type="image/svg+xml" href="/favicon/favicon.svg" />
-	<link rel="shortcut icon" href="/favicon/favicon.ico" />
-	<link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png" />
-	<meta name="apple-mobile-web-app-title" content="MyRPC" />
-	<link rel="manifest" href="/favicon/site.webmanifest" />
+	<link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png">
+	<link rel="manifest" href="/favicon/site.webmanifest">
+	<link rel="mask-icon" href="favicon/safari-pinned-tab.svg" color="#5bbad5">
+	<link rel="shortcut icon" href="/favicon/favicon.ico">
+	<meta name="msapplication-TileColor" content="#da532c">
+	<meta name="msapplication-config" content="/favicon/browserconfig.xml">
+	<meta name="theme-color" content="#E8ECEF">
 
 
   <title>MyRPC</title>
 
   <!-- meta tags for responsive web on mobile/desktop -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+  
+   <link rel="stylesheet" href="/DemoStyles.css"> <!-- Linking to external CSS file -->
   
 </head>
 <body>
-	
   <iframe 
     src="https://script.google.com/macros/s/AKfycbz8mmnc6pl2q57kz3iCeSAfToXTqbOF4VPVj5SVtjjUKNMLaTN0ZYzWa2hl5ZXBkK0r6w/exec"
     allow="autoplay; fullscreen; geolocation; microphone; midi; payment; usb; accelerometer; gyroscope; magnetometer; screen-wake-lock; clipboard-read; clipboard-write; web-share; encrypted-media; camera">
   </iframe>
-	 <!-- https://script.google.com/macros/s/AKfycbx_j7OdjRywCdADervHBbvCA73PvIUdjSn6B7nRF5IqCnZDzanNWDSHo_4_jr6dNLXA3Q/exec  USED-->
-	<!-- https://script.google.com/macros/s/AKfycbzd8Af4-HqR2KwX0qTfbIa4FsU-7p52yUSt9J8hVGJvRWae5a-WQ6VQFiUHF17YHgDQ/exec -->
- 
 
     <!-- Footer area to center the home button and copyright -->
-<!--  <footer>
+  <footer>
+  <section class="buttons-section">
+    <a href="/" class="btn-link">
+            <button class="btn">Back</button></a>
+    </section>
+
     <div class="copyright">
       &copy; <span id="year"></span> Fyrus Apps. All rights reserved.
     </div>
-  </footer> -->
+  </footer>
  
 
     <script>	    
 	    // Get the current year from the device and update the copyright span
-		const yearSpan = document.getElementById("year");
-	    if (yearSpan) {
-		    yearSpan.textContent = new Date().getFullYear();
-	    }
+		document.getElementById("year").textContent = new Date().getFullYear();
 	</script>
-
-<script>
-const prompt = document.querySelector('.prompt');
-const installButton = prompt.querySelector('.prompt__install');
-const overlay = document.querySelector('.overlay'); // Select the overlay
-let installEvent;
-
-function getVisited() {
-  return sessionStorage.getItem('install-prompt');
-}
-
-function setVisited() {
-  sessionStorage.setItem('install-prompt', true);
-}
-
-// This event will only fire if the user does not have the PWA installed
-window.addEventListener('beforeinstallprompt', (event) => {
-  event.preventDefault();
-
-  // If no sessionStorage is set, first-time visitor in this session
-  if (!getVisited()) {
-    // Show the prompt banner and overlay
-    prompt.style.display = 'block';
-    overlay.style.display = 'block';
-
-    // Store the event for later use
-    installEvent = event;
-  }
-});
-
-installButton.addEventListener('click', () => {
-  // Hide the prompt banner and overlay
-  prompt.style.display = 'none';
-  overlay.style.display = 'none';
-
-  // Trigger the prompt to show to the user
-  installEvent.prompt();
-
-  // Check what choice the user made
-  installEvent.userChoice.then((choice) => {
-    // If the user declined, we don't want to show the button again
-    // Set sessionStorage to true
-    if (choice.outcome !== 'accepted') {
-      setVisited();
-    }
-
-    installEvent = null;
-  });
-});
-
-// Close the modal when clicking outside of it
-overlay.addEventListener('click', () => {
-  setVisited(); // Set sessionStorage to true
-  prompt.style.display = 'none';  // Hide the prompt banner
-  overlay.style.display = 'none'; // Hide the overlay
-  installEvent = null;
-});
-
-</script>
-
-	<script>
-  if (typeof navigator.serviceWorker !== 'undefined') {
-    navigator.serviceWorker.register('pwabuilder-sw.js')
-  }
-</script>
-
   
 </body>
 </html>
