@@ -23,3 +23,18 @@
       flex-grow: 1; /* Allow iframe to grow and take up space */
       border: none;
     }
+
+.copyright {
+  /*  margin-top: 5px; /* Add some space between social icons and copyright */
+    font-size: 1px; /* Font size for copyright text */
+    color: #455A64; /* Copyright text color */
+}
+
+    /* Footer area to hold the button and copyright */
+footer {
+    margin-top: auto; /* Pushes footer to the bottom */
+    background-color: transparent; /* #E8ECEF; /* Match background color */
+   /* padding: 5px; /* Add padding */
+    color: transparent; /* #455A64; /* Change text color for visibility */
+    text-align: center;
+}
