@@ -28,8 +28,18 @@
     allow="autoplay; fullscreen; geolocation; microphone; midi; payment; usb; accelerometer; gyroscope; magnetometer; screen-wake-lock; clipboard-read; clipboard-write; web-share; encrypted-media; camera">
   </iframe>
 
-  <!-- Hidden fallback content to pass PWABuilder validation -->
-  <!--<div style="font-size:1px;height:1px;line-height:1px;color:#E8ECEF;">.</div>    -->
+    <!-- Footer area to center the home button and copyright -->
+  <footer>
+    <div class="copyright">
+      &copy; <span id="year"></span> Fyrus Apps. All rights reserved.
+    </div>
+  </footer>
+ 
+
+    <script>	    
+	    // Get the current year from the device and update the copyright span
+		document.getElementById("year").textContent = new Date().getFullYear();
+	</script>
 
   
 </body>
